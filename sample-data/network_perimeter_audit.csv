@@ -1,0 +1,10 @@
+host,port,protocol,service,exposure,state,authentication,encryption,required,configurationNotes
+edge-gw.corp.net,3389,TCP,RDP,Public,open,None,None,No,Exposed legacy remote desktop interface
+edge-gw.corp.net,23,TCP,Telnet,Public,open,None,None,No,Deprecated unencrypted telnet console
+app.corp.net,443,TCP,HTTPS,Public,open,Required,TLS 1.3,Yes,Primary secured production web service
+app.corp.net,80,TCP,HTTP,Public,open,None,None,Yes,HTTP listener for redirect
+bastion.corp.net,22,TCP,SSH,External,open,Required,SSH-2.0,Yes,Production jump host with MFA
+db-master.internal,3306,TCP,MySQL,Internal,open,Required,TLS,Yes,Backend transactional database
+dns-01.internal,53,UDP,DNS,Internal,open,None,None,Yes,Core internal recursive nameserver
+storage.internal,445,TCP,SMB,Internal,open,Required,SMB 3.1.1,Yes,Departmental file share
+dev-box.internal,9999,TCP,Unknown,External,open,Unknown,Unknown,No,Unidentified service port needing analyst review

@@ -1,0 +1,6 @@
+host,port,protocol,service,exposure,state,authentication,encryption,required,configurationNotes
+vpn.domain.com,443,TCP,HTTPS,Public,open,Required,TLS 1.3,Yes,SSL-VPN web gateway (should NOT be Critical)
+db.domain.com,5432,TCP,PostgreSQL,Public,open,None,None,No,Exposed database without authentication
+mail.domain.com,25,TCP,SMTP,Public,open,None,None,Yes,Internet mail transfer agent
+router.corp,53,TCP,DNS,Public,open,None,None,Yes,Public DNS TCP fallback
+shadow-it.corp,8080,TCP,Unknown,Public,open,Unknown,Unknown,No,Shadow service discovered on perimeter
