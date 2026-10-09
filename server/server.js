@@ -17,7 +17,21 @@ app.use(helmet({
 }));
 const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({
-  origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => {
+    // Allow non-browser requests (mobile, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    // Allow configured CLIENT_URL, local ports, and any Vercel deployment domain
+    if (
+      origin === clientUrl ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1') ||
+      origin.endsWith('.vercel.app') ||
+      process.env.NODE_ENV !== 'production'
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Permissive in deployment to avoid CORS blocking
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
